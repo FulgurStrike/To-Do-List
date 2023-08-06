@@ -30,7 +30,6 @@ function addNewTask() {
     deleteButton.textContent = "Delete";
     deleteContainer.appendChild(deleteButton);
     taskContainer.appendChild(deleteContainer);
-    counter += 1
 
     deleteButton.addEventListener("click", (event) =>{
         deleteButton = event.target
