@@ -1,11 +1,11 @@
 var btn = document.querySelector(".add-new");
-btn.addEventListener("click", addNewTask);
+btn.addEventListener("click", addTask);
 
-function addNewTask() {
+
+function createTaskDiv(textEntry) {
     
     mainBody = document.querySelector(".main-body");
-    textEntry = document.querySelector(".text-input").value;
-
+    
     task = document.createElement('div');
     task.setAttribute("class", "task");
     taskContainer = document.createElement('div');
@@ -34,12 +34,37 @@ function addNewTask() {
     deleteButton.addEventListener("click", (event) =>{
         deleteButton = event.target
         parent = deleteButton.parentElement.parentElement.parentElement
+        taskText = parent.childNodes[0].childNodes[0].childNodes[0].textContent
+        tasksInLocalStorage = JSON.parse(localStorage.getItem("tasks"));
+        arrayWithoutElement = tasksInLocalStorage.filter(function (word) {
+            return word !== taskText
+        });
+        
+        localStorage.setItem("tasks", JSON.stringify(arrayWithoutElement))
+
         parent.remove()
+
         
     });
 
-};
+    
+
+}
 
 
+function saveItems(textEntry) {
+    var tasks = JSON.parse(localStorage.getItem("tasks") || "[]");
+    tasks.push(textEntry);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
+function addTask() {
+    textEntry = document.querySelector(".text-input").value;
+    
+    createTaskDiv(textEntry);
+    saveItems(textEntry);
+}
+
+
+JSON.parse(localStorage.getItem("tasks") || "[]").forEach(createTaskDiv)
 
