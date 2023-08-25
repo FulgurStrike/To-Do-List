@@ -5,11 +5,11 @@ function createTaskDiv(textEntry) {
 
     
     
-    mainBody = document.querySelector(".main-body");
+    const mainBody = document.querySelector(".main-body");
     
     const task = document.createElement('div');
     task.setAttribute("class", "task");
-    taskContainer = document.createElement('div');
+    const taskContainer = document.createElement('div');
     taskContainer.setAttribute("class", "task-container");
     task.appendChild(taskContainer);
     mainBody.appendChild(task);
@@ -37,7 +37,7 @@ function createTaskDiv(textEntry) {
         const parent = button.parentElement.parentElement.parentElement
         const taskText = parent.childNodes[0].childNodes[0].childNodes[0].textContent
         const tasksInLocalStorage = JSON.parse(localStorage.getItem("tasks"));
-        arrayWithoutElement = tasksInLocalStorage.filter(function (word) {
+        const arrayWithoutElement = tasksInLocalStorage.filter(function (word) {
             return word !== taskText
         });
         
